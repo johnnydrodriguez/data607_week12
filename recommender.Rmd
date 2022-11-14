@@ -1,0 +1,76 @@
+---
+title: "Recommender"
+author: "Johnny Rodriguez"
+date: "2022-11-14"
+output:
+  html_document:
+    code_folding: show
+    toc: true
+    toc_float:
+      collapsed: false
+    toc_depth: 4
+    number_sections: false
+    highlight: pygments
+    theme: cerulean
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Recommender Assignment
+
+1. Perform a Scenario Design analysis as described below.  Consider whether it makes sense for your selected recommender system to perform scenario design twice, once for the organization (e.g. Amazon.com) and once for the organization's customers.
+2. Attempt to reverse engineer what you can about the site, from the site interface and any available information that you can find on the Internet or elsewhere.
+3. Include specific recommendations about how to improve the site's recommendation capabilities going forward. 
+
+<b/>
+
+### Scenario Analysis
+
+The site I am using is reddit.com.  Specifically, I am referencing reddit's recommendations for content (ie, the article, links and posts that are presented in the home page feed) and the recommendations for subreddits -- which are community groups of shared interest where that content lives.
+
+#### Scenario Design
+
+>1. Who are your target users?
+
+Reddit casts a pretty broad net -- but ultimately drives engagement by presenting content to users of communities of shared interests called subreddits.  These communities can be rather large and popular but very generalized.  For example, the subreddit community r/funny  - where members submit and vote on "funny" content has 40+ million members. r/AskReddit - where members ask the community questions about any topic -- has 35+ million members. Both are so general that they can literally cover any topic that can tangentially be categorized as "funny" or a "question".
+
+The target audience is anyone who is interested in being part of a community, the content that community creates or disseminates and wants to engage with other community members. Subreddit communities are user-created and moderated and they they cover a very broad range of popular topics all the way to very small, niche groups.  There are about 2.8 million subreddits.
+
+>2. What are their goals?
+
+Community engagement and development is the goal.  Interacting with communities you find interesting is what keeps users on the site.  Besides the content a community promotes, subreddits are designed to drive conversation in the user forums for each reddit post.  Members of the community can comment and vote for content as well as respond to and interact with each other within the user forums. Arguably, the user forums are the best part of reddit as they  usually provide much more content, context, and direct user interactions well beyond the source material.  These forums spawn more engagement as they allow you to follow along in a conversational thread, or engage with community members with the most popular parts of that thread, or the members with the most controversial parts of the thread.  Forums also allow you to cross-post shared interest between communities to create connections between them.  For example, a user who is the r/cats subreddit and engages in a conversation about cat medical care can cross reference the thread in the r/veterinary, r/catfood or r/catfacts subreddits.  There is no limit to these cross subreddit associations that foster discovery and interact of subreddits.
+
+>3. How can you help them accomplish their goals?
+
+Since reddit communities are really at the heart of the site, it may be helpful to mine community posts to identify new possible subreddits (whether they exist or not) and funnel members into those communities.  For example, the r/politics subreddit had 100,000+ comments from thousands of unique members for its thread regarding the midterm election results.  Although many of these comments are largely related to the topic, individuals participating in this thread can be introduced or induced to new subreddits as these engage and expose other interests.  A quick scan of the thread shows engagement around data science, polling, local state-level news events, history, constitutional law, and rumors and gossip about any number of other topics.  Any thread in one subreddit for one post provides a pool of potential members for subreddits that may not exist until similar members are pulled together -- which could then lead to new communities and new posts and then new pools that creates self perpetuating cycle of new communities.
+
+<b/>
+
+### Reverse Engineer
+According to reddit, ***the Best sort is a personalized sorting option that’s continuously being improved. To suggest content, it takes some elements of your Reddit activity into account such as whether you tend to like new communities or not, how old or new your account is, and what types of posts you’ve upvoted or commented on in the past. If you want to see a non-personalized sort, the Hot sort ranks posts based on upvotes, downvotes, and the age of the post.***
+
+
+$source: https://reddit.zendesk.com/hc/en-us/articles/4402284777364-What-are-home-feed-recommendations-#:~:text=To%20suggest%20content%2C%20it%20takes,commented%20on%20in%20the%20past$
+
+I assume Reddit is using a couple of different mechanisms to make these recommendations.  Much like Amazon, it may be using keywords associated with specific subreddits to present content.  It gives a lot of weight to user moderated and voted content; that is, it will not recommend content the subreddit community members have already identified as poor quality content.  But for anything that isn't that, it recommends content I may find interesting based on my subreddit memberships and my click history.  That is, since I am member of the r/politics subreddit and have read other content there about local New York elections, it will present more non-politic based content based on "New York" like apple picking and local wineries.  
+
+Reddit's location based recommendations are based on city-level IP address assignments so it can recommend content in the city, state or country --  but not specific to your exact current location.  ***Reddit captures your IP address and infers a general location based on that IP address.  To do this we use an IP lookup service that provides us with a City/State/Country location based on your IP address...As an example, if you visit Reddit today and your IP address is from San Francisco, we may recommend communities in San Francisco, or in adjacent cities. In areas where we may not have city specific communities, we might make content recommendations at a State or Country level.***
+
+The site marries the information it gleans from self-reported profile information - like age, sex, and other personal info I choose to provide to click, comment, subscription and vote history.  This likely allows reddit to find similar users, in similar locations with similar user content profiles to recommend subreddits and content that other similar members are consuming.  
+
+
+$source: https://reddit.zendesk.com/hc/en-us/articles/360049845011-How-Reddit-Uses-Location-Data-#:~:text=Reddit%20captures%20your%20IP%20address,based%20on%20your%20IP%20address$
+
+<b/>
+
+### Specific Recommendation
+Reddit's missed opportunity is that people who are actively engaging in communities of shared interest are likely aware of other interests that they may want to explore.  Reddit's solution to this is to ask a user to create a new subreddit -- and hope others find it. Ideally, the interface would identify potential members based on their profile, location, comment and click history which then you would proactively invite to join you in a new community. Although largely broad topics see a lot of traffic, niche interests may not get any click at all -- not because there are no other folks with that  interest, but they would literally have to find the needle in haystack to find small communities.
+
+Ideally, I'd be able to search for members who might fit a custom/tailored profile that I closely align with: men over 40 years old with young kids old who like to play Xbox games.  Or, for my wife: working mothers with young kids who want a local running group in Westchester.  Given the millions of users, the hundreds of millions of comments, the millions of subreddits, I should be able to identify a potential pool for this community and invite them to a subreddit.  Currently, this process of community building is left to chance  - and highly unlikely the more niche the community without any easily discernable or predictable name.  Reddit should add tools that make it possible to organize communities by letting users identify those members that share these niche interests and invite them to join the subreddit.
+
+<b/>
+
+### Conclusion
+After a bit of research, it does not appear that the Reddit recommender system is as robust as others given its size and popularity -- like Netflix or Amazon.  It relies heavily on user recommended amd moderated content based on community affiliation. It prompts and supplements this content by taking some self-reported information about you to make further recommendations - but this is sparse.  Reddit may make other recommendations based on your unique interactions, comments, posts and votes within a community -- but it doesn't appear that reddit is sensitive to these markers as it very often provides recommendations (at least for me) that I have no interest in learning about. Interestingly, building a reddit recommender system for subreddits seems to be a hobby for some online -- and may perhaps be an interesting community to launch.
